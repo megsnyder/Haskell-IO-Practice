@@ -26,4 +26,8 @@
 import PTfuncsyntax
 
 
-main = putStrLn "Put your program here!"
+main = do
+    putStrLn "Type a four-digit number:"
+    num <- readLn
+    dict <- readFile "/usr/share/dict/american-english"
+    mapM_ putStrLn [ '"':x ++ '"':[] | x <- (words dict), num == wordsToPhone x]
