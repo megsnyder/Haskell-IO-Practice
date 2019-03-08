@@ -37,17 +37,27 @@
     Your number is 889, right? (answer "yes" or "no") 
     yes
     I KNEW IT! Thank you.
--}
 
-guessIt :: Int -> IO ()
-guessIt 11 = putStrLn "Wait.. I have already guessed everything! Cheater."
-guessIt s = do
-    putStrLn $ "Is your number " ++ show s ++ "? (answer \"yes\" or \"no\") "
-    guess <- getLine
-    if guess == "yes"
-        then putStrLn "I KNEW IT! Thank you."
-        else guessIt (s+1)
+
+-}
+guessIt :: Int -> Int -> IO ()
+guessIt x y= do
+    if x-y<2 then do 
+        putStrLn $ "Is your number " ++ show x ++ "? (answer \"yes\" or \"no\") "
+        guess <- getLine
+        if guess == "yes" then putStrLn "I KNEW IT! Thank you."
+        else do
+            putStrLn $ "Your number is " ++ show y ++ ", right? (answer \"yes\" or \"no\") "
+            guess <- getLine
+            if guess == "yes" then putStrLn "I KNEW IT! Thank you."
+            else putStrLn "Sorry about that."
+        
+    else do 
+        putStrLn $ "Is your number greater than " ++ show (((x-y) `div` 2)+y) ++ "? (answer \"yes\" or \"no\") "
+        guess <- getLine
+        if guess == "yes" then guessIt x (((x-y) `div` 2)+y)
+        else guessIt (((x-y) `div` 2)+y) y
 
 main = do
-    putStrLn "Think of a number between 1 and 10 and I will guess it."
-    guessIt 1
+    putStrLn "Think of a number between 1 and 1000 and I will guess it."
+    guessIt 1000 0
