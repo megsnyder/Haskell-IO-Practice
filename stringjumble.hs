@@ -25,4 +25,11 @@
     
 -}
 
-main = putStrLn "Put your program here!"
+main = do
+    putStrLn "Please enter a string of text (the bigger the better):"
+    phrase <- getLine 
+    putStrLn ("You entered " ++('"':(phrase++'"':("."))))
+    putStrLn "Now jumble it:"
+    putStrLn (reverse phrase)
+    putStrLn (unwords(reverse(words phrase)))
+    putStrLn (unwords(reverse(words (reverse phrase))))
