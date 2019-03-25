@@ -50,4 +50,7 @@ main = do
     putStrLn "Type any word and I will tell you if it is in the dictionary:"
     word <- getLine
     dict <- readFile "/usr/share/dict/american-english"
-    if (map toLower word)  `elem` words dict then putStrLn ("Yes, " ++ word ++ " is in the dictionary.") else putStrLn ("No, " ++ word ++ " is not in the dictionary.")
+    if word=="" then putStrLn ""
+    else do
+        if (map toLower word)  `elem` words dict then putStrLn ("Yes, " ++ word ++ " is in the dictionary.") else putStrLn ("No, " ++ word ++ " is not in the dictionary.")
+        main
